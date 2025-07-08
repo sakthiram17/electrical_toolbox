@@ -32,5 +32,4 @@ PointType generateRectWave(RectWaveGenerator *generator)
 
     generator->currentTime += generator->samplingTime;
     return point;
-    return point;
 }
