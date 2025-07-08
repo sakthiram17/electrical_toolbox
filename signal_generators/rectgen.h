@@ -20,4 +20,4 @@ typedef struct RectWaveGenerator
 void rectGeneratorInit(RectWaveGenerator *generator, float frequency, float phase, float samplingTime, float dutyCycle , float highValue, float lowValue);
 PointType generateRectWave(RectWaveGenerator *generator);
 
-#endif RECTGEN_H
+#endif

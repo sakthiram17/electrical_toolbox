@@ -27,7 +27,7 @@ PointType generateRectWave(RectWaveGenerator *generator)
     if (t_in_period < onTime) {
         point.value = generator->highValue;
     } else {
-        point.value = -generator->lowValue;
+        point.value = generator->lowValue;
     }
 
     generator->currentTime += generator->samplingTime;
