@@ -4,8 +4,7 @@
     {
       "label": "Build test",
       "type": "shell",
-      "group": "build",
-      "command": "gcc -I./common -I./signal_generators -I./utils -I./basic_signal_math $(find . -name '*.c') -o test.exe -lm",
+      "command": "gcc -mconsole -I./common -I./signal_generators -I./utils -I./basic_signal_math ./test.c $(find ./common -name '*.c') $(find ./signal_generators -name '*.c') $(find ./utils -name '*.c') $(find ./basic_signal_math -name '*.c') -o test.exe -lm",
       "options": {
         "shell": {
           "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
@@ -13,12 +12,12 @@
             "-c"
           ]
         }
-      }
+      },
+      "group": "build"
     },
     {
       "label": "Run test",
       "type": "shell",
-      "group": "build",
       "command": "./test.exe",
       "options": {
         "shell": {
@@ -27,13 +26,13 @@
             "-c"
           ]
         }
-      }
+      },
+      "group": "build"
     },
     {
       "label": "Build example",
       "type": "shell",
-      "group": "build",
-      "command": "gcc -I./common -I./signal_generators -I./utils -I./basic_signal_math $(find . -name '*.c') -o example.exe -lm",
+      "command": "gcc -mconsole -I./common -I./signal_generators -I./utils -I./basic_signal_math ./example.c $(find ./common -name '*.c' ! -name 'test.c' ! -name 'example.c') $(find ./signal_generators -name '*.c' ! -name 'test.c' ! -name 'example.c') $(find ./utils -name '*.c' ! -name 'test.c' ! -name 'example.c') $(find ./basic_signal_math -name '*.c' ! -name 'test.c' ! -name 'example.c') -o example.exe -lm",
       "options": {
         "shell": {
           "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
@@ -41,12 +40,12 @@
             "-c"
           ]
         }
-      }
+      },
+      "group": "build"
     },
     {
       "label": "Run example",
       "type": "shell",
-      "group": "build",
       "command": "./example.exe",
       "options": {
         "shell": {
@@ -55,7 +54,8 @@
             "-c"
           ]
         }
-      }
+      },
+      "group": "build"
     }
   ]
 }
