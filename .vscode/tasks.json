@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build test",
+      "type": "shell",
+      "group": "build",
+      "command": "gcc -I./common -I./signal_generators -I./utils -I./basic_signal_math $(find . -name '*.c') -o test.exe -lm",
+      "options": {
+        "shell": {
+          "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
+          "args": [
+            "-c"
+          ]
+        }
+      }
+    },
+    {
+      "label": "Run test",
+      "type": "shell",
+      "group": "build",
+      "command": "./test.exe",
+      "options": {
+        "shell": {
+          "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
+          "args": [
+            "-c"
+          ]
+        }
+      }
+    },
+    {
+      "label": "Build example",
+      "type": "shell",
+      "group": "build",
+      "command": "gcc -I./common -I./signal_generators -I./utils -I./basic_signal_math $(find . -name '*.c') -o example.exe -lm",
+      "options": {
+        "shell": {
+          "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
+          "args": [
+            "-c"
+          ]
+        }
+      }
+    },
+    {
+      "label": "Run example",
+      "type": "shell",
+      "group": "build",
+      "command": "./example.exe",
+      "options": {
+        "shell": {
+          "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
+          "args": [
+            "-c"
+          ]
+        }
+      }
+    }
+  ]
+}
