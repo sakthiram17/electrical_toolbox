@@ -4,7 +4,7 @@
     {
       "label": "Build test",
       "type": "shell",
-      "command": "g++ -mconsole -I./common -I./signal_generators -I./utils -I./basic_signal_math ./test.cpp $(find ./common -name '*.cpp') $(find ./signal_generators -name '*.cpp') $(find ./utils -name.cpp '*.cpp') $(find ./basic_signal_math -name '*.cpp') -o test.exe -lm",
+      "command": "g++ -mconsole -I./common -I./signal_generators -I./utils -I./basic_signal_math ./test.cpp $(find ./common -name '*.cpp') $(find ./signal_generators -name '*.cpp') $(find ./utils -name '*.cpp') $(find ./basic_signal_math -name '*.cpp') -o test.exe -lm",
       "options": {
         "shell": {
           "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
