@@ -5,4 +5,7 @@
 #define EPSILON 1e-3
 #define MAX_SIGNAL_LENGTH 64
 
+#define min(a,b) ((a)<(b)?(a):(b))
+#define max(a,b) ((a)>(b)?(a):(b))
+
 #endif

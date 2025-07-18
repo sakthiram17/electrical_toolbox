@@ -32,12 +32,12 @@ public:
         }
     }
 
-    const Point<TimeType> &operator[](size_t index) const
+    const Point<TimeType> &operator[](int index) const
     {
         return points[index];
     }
 
-    Point<TimeType> &operator[](size_t index)
+    Point<TimeType> &operator[](int index)
     {
         return points[index];
     }
@@ -76,29 +76,26 @@ public:
     }
 
     // Compare two signals (returns difference signal)
-    Signal compare(const Signal &other, float emptyValue = 0.0f) const
+    void compare(const Signal<TimeType> &other, Signal<TimeType> &result, float emptyValue = 0.0f) const
     {
-        TimeType start = std::min(points[0].time, other.points[0].time);
-        TimeType end = std::max(points[length - 1].time, other.points[other.length - 1].time);
-        TimeType timeInterval = std::min(samplingTime, other.samplingTime);
+        TimeType start = min(points[0].time, other.points[0].time);
+        TimeType end = max(points[length - 1].time, other.points[other.length - 1].time);
+        TimeType dt = min(samplingTime, other.samplingTime);
+        int newLen = static_cast<int>((end - start) / dt) + 1;
 
-        int newLength = static_cast<int>((end - start) / timeInterval) + 1;
-        Signal result;
-        result.length = newLength;
-        result.samplingTime = timeInterval;
+        result.clear();
+        result.setSamplingTime(dt);
 
-        TimeType currentTime = start;
-        for (int i = 0; i < newLength; ++i)
+        if (newLen > MAX_SIGNAL_LENGTH)
+            newLen = MAX_SIGNAL_LENGTH;
+
+        TimeType t = start;
+        for (int i = 0; i < newLen; ++i)
         {
-            float v1 = getValueAtTime(currentTime, emptyValue);
-            float v2 = other.getValueAtTime(currentTime, emptyValue);
-
-            result.points[i].time = currentTime;
-            result.points[i].value = v1 - v2;
-
-            currentTime += timeInterval;
+            float v1 = getValueAtTime(t, emptyValue);
+            float v2 = other.getValueAtTime(t, emptyValue);
+            result.addPoint(t, v1 - v2);
+            t += dt;
         }
-
-        return result;
     }
 };
