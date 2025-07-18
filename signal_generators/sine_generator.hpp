@@ -29,7 +29,7 @@ public:
         return pt;
     }
 
-    Point<TimeType> generateNthSample(std::size_t n) const {
+    Point<TimeType> getNthSample(std::size_t n) const {
         TimeType t = static_cast<TimeType>(n) * samplingTime;
         Point<TimeType> pt;
         pt.time = t;
@@ -40,7 +40,7 @@ public:
     void reset() {
         currentTime = 0.0f;
     }
-    
+
     void setFrequency(float f) { frequency = f; }
     void setAmplitude(float a) { amplitude = a; }
     void setPhase(float p) { phase = p; }

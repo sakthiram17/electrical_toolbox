@@ -26,7 +26,7 @@ public:
         return pt;
     }
 
-    Point<TimeType> generateNthSample(int n) const
+    Point<TimeType> getNthSample(int n) const
     {
         Point<TimeType> pt;
         pt.time = static_cast<TimeType>(n) * samplingTime;
