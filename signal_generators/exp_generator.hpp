@@ -26,6 +26,14 @@ public:
         return pt;
     }
 
+    Point<TimeType> generateNthSample(int n) const
+    {
+        Point<TimeType> pt;
+        pt.time = static_cast<TimeType>(n) * samplingTime;
+        pt.value = amplitude * std::exp(-pt.time / tau);
+        return pt;
+    }
+
     void reset()
     {
         currentTime = 0.0f;
