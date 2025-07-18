@@ -11,6 +11,7 @@
 #include "signal_generators/sawtooth_generator.hpp"
 #include "signal_generators/triangle_generator.hpp"
 #include "utils/helper.hpp"
+#include "point_wise_math/integrator.hpp"
 
 struct TestResult
 {
@@ -22,6 +23,27 @@ struct TestResult
 
 template <typename Generator>
 using GenFunc = Point<float> (Generator::*)();
+void testIntegrator()
+{
+    std::cout << "\nRunning Integrator test on Ramp signal...\n";
+    std::cout << "time,input,integrated\n";
+
+    StepGenerator<float> stepGen(1.0f, 0.0f, 1.0f);
+    RampGenerator<float> RampGenerator(1.0, 0.1f);
+    Integrator<float> integrator;
+
+    const int samples = 21;
+
+    for (int i = 0; i < samples; ++i)
+    {
+        Point<float> pt = RampGenerator.generateNext();
+        double integral = integrator.integrate(pt);
+        std::cout << pt.time << "," << integral << "\n";
+    }
+}
+
+
+
 void testSignalCompare()
 {
     std::cout << "\nRunning Signal::compare() test...\n";
@@ -175,5 +197,6 @@ int main()
     printf("TOTAL: %d passed, %d failed\n", total_passed, total_failed);
 
     testSignalCompare(); // Optional test for comparator logic
+    testIntegrator();
     return (total_failed > 0) ? 1 : 0;
 }
