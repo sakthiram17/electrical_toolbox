@@ -11,8 +11,8 @@
 #include "utils/helper.h"
 #include "basic_signal_math/comparator.test.h"
 
-
-typedef struct {
+typedef struct
+{
     const char *name;
     int passed;
     int total;
@@ -27,47 +27,60 @@ TestResult check_generator(
     float expected_values[],
     int num_samples)
 {
-    TestResult result = { name, 0, num_samples, 0 };
+    TestResult result = {name, 0, num_samples, 0};
 
-    for (int i = 0; i < num_samples; i++) {
+    for (int i = 0; i < num_samples; i++)
+    {
         PointType pt = generate(gen);
         int pass_time = float_equal(pt.time, expected_times[i]);
         int pass_value = float_equal(pt.value, expected_values[i]);
 
-        if (!pass_time || !pass_value) {
+        if (!pass_time || !pass_value)
+        {
             printf("FAIL [%s] sample %d\n", name, i);
             printf("    Expected time: %.4f, Actual: %.4f\n", expected_times[i], pt.time);
             printf("    Expected val : %.4f, Actual: %.4f\n", expected_values[i], pt.value);
             result.failed++;
-        } else {
+        }
+        else
+        {
             result.passed++;
         }
     }
 
-    if (result.failed == 0) {
+    if (result.failed == 0)
+    {
         printf("PASS %s [%d/%d]\n\n", name, result.passed, result.total);
-    } else {
+    }
+    else
+    {
         printf("FAIL %s [%d/%d]\n\n", name, result.passed, result.total);
     }
     return result;
 }
 
-PointType wrapper_step(void *g) {
+PointType wrapper_step(void *g)
+{
     return generateStep((StepGenerator *)g);
 }
-PointType wrapper_ramp(void *g) {
+PointType wrapper_ramp(void *g)
+{
     return generateRamp((RampGenerator *)g);
 }
-PointType wrapper_delta(void *g) {
+PointType wrapper_delta(void *g)
+{
     return generateDelta((DeltaGenerator *)g);
 }
-PointType wrapper_exp(void *g) {
+PointType wrapper_exp(void *g)
+{
     return generateExponential((ExponentialGenerator *)g);
 }
-PointType wrapper_saw(void *g) {
+PointType wrapper_saw(void *g)
+{
     return generateSawtooth((SawtoothGenerator *)g);
 }
-PointType wrapper_tri(void *g) {
+PointType wrapper_tri(void *g)
+{
     return generateTriangle((TriangleGenerator *)g);
 }
 
@@ -89,7 +102,8 @@ int main()
     triangleGeneratorInit(&triGen, 1.0f, 40.0f, 1.0f);
 
     float times[41];
-    for (int i = 0; i < no_of_samples; i++) {
+    for (int i = 0; i < no_of_samples; i++)
+    {
         times[i] = (float)i;
     }
 
@@ -100,7 +114,8 @@ int main()
     float saw_vals[41];
     float tri_vals[41];
 
-    for (int i = 0; i < no_of_samples; i++) {
+    for (int i = 0; i < no_of_samples; i++)
+    {
         step_vals[i] = 1.0f;
         ramp_vals[i] = 2.0f * i;
         delta_vals[i] = (i == 0) ? 5.0f : 0.0f;
@@ -112,7 +127,7 @@ int main()
         0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f,
         0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f,
         0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f,
-        0.0000f };
+        0.0000f};
     memcpy(exp_vals, exp_values, sizeof(exp_values));
 
     float saw_values[41] = {
@@ -121,8 +136,7 @@ int main()
         0.5000f, 0.6000f, 0.7000f, 0.8000f, 0.9000f, -1.0000f, -0.9000f, -0.8000f,
         -0.7000f, -0.6000f, -0.5000f, -0.4000f, -0.3000f, -0.2000f, -0.1000f,
         0.0000f, 0.1000f, 0.2000f, 0.3000f, 0.4000f, 0.5000f, 0.6000f, 0.7000f,
-        0.8000f, 0.9000f, -1.0000f
-    };
+        0.8000f, 0.9000f, -1.0000f};
     memcpy(saw_vals, saw_values, sizeof(saw_values));
 
     float tri_values[41] = {
@@ -131,8 +145,7 @@ int main()
         0.5000f, 0.6000f, 0.7000f, 0.8000f, 0.9000f, 1.0000f, 0.9000f, 0.8000f,
         0.7000f, 0.6000f, 0.5000f, 0.4000f, 0.3000f, 0.2000f, 0.1000f, -0.0000f,
         -0.1000f, -0.2000f, -0.3000f, -0.4000f, -0.5000f, -0.6000f, -0.7000f,
-        -0.8000f, -0.9000f, -1.0000f
-    };
+        -0.8000f, -0.9000f, -1.0000f};
     memcpy(tri_vals, tri_values, sizeof(tri_values));
 
     TestResult results[6];
@@ -147,11 +160,15 @@ int main()
     results[5] = check_generator("Triangle", wrapper_tri, &triGen, times, tri_vals, no_of_samples);
 
     printf("----------- TEST SUMMARY -----------\n");
-    for (int i = 0; i < 6; i++) {
-        if (results[i].failed == 0) {
+    for (int i = 0; i < 6; i++)
+    {
+        if (results[i].failed == 0)
+        {
             printf("PASS  %-12s %3d/%3d\n", results[i].name, results[i].passed, results[i].total);
             total_passed++;
-        } else {
+        }
+        else
+        {
             printf("FAIL  %-12s %3d/%3d\n", results[i].name, results[i].passed, results[i].total);
             total_failed++;
         }

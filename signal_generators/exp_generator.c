@@ -1,5 +1,6 @@
-#include "../common/constants.h"
-#include "exp_generator.h"
+#include "../common/constants.hpp"
+#include "exp_generator.hpp
+"
 
 #include <math.h>
 
