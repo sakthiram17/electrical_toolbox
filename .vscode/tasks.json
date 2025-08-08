@@ -4,7 +4,7 @@
     {
       "label": "Build test",
       "type": "shell",
-      "command": "g++ -mconsole -I./common -I./signal_generators  -I./point_wise_math  -I./utils -I./basic_signal_math ./test.cpp $(find ./common -name '*.cpp') $(find ./signal_generators -name '*.cpp') $(find ./utils -name '*.cpp') $(find ./basic_signal_math -name '*.cpp') -o test.exe -lm",
+      "command": "g++ -mconsole -I./common -I./signal_generators  -I./point_wise_math  -I./utils  ./test.cpp $(find ./common -name '*.cpp') $(find ./signal_generators -name '*.cpp') $(find ./utils -name '*.cpp') -o test.exe -lm",
       "options": {
         "shell": {
           "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
@@ -32,7 +32,7 @@
     {
       "label": "Build example",
       "type": "shell",
-      "command": "g++ -mconsole -I./common  -I./point_wise_math -I./signal_generators -I./utils -I./basic_signal_math ./example.cpp $(find ./common -name '*.cpp' ! -name 'test.cpp' ! -name 'example.cpp') $(find ./signal_generators -name '*.cpp' ! -name 'test.cpp' ! -name 'example.cpp') $(find ./utils -name '*.cpp' ! -name 'test.cpp' ! -name 'example.cpp') $(find ./basic_signal_math -name '*.cpp' ! -name 'test.cpp' ! -name 'example.cpp') -o example.exe -lm",
+      "command": "g++ -mconsole -I./common  -I./point_wise_math -I./signal_generators -I./utils  ./example.cpp $(find ./common -name '*.cpp' ! -name 'test.cpp' ! -name 'example.cpp') $(find ./signal_generators -name '*.cpp' ! -name 'test.cpp' ! -name 'example.cpp') $(find ./utils -name '*.cpp' ! -name 'test.cpp' ! -name 'example.cpp') $(find ./basic_signal_math -name '*.cpp' ! -name 'test.cpp' ! -name 'example.cpp') -o example.exe -lm",
       "options": {
         "shell": {
           "executable": "C:\\Program Files\\Git\\bin\\bash.exe",

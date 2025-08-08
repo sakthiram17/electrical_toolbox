@@ -12,6 +12,7 @@
 #include "signal_generators/triangle_generator.hpp"
 #include "utils/helper.hpp"
 #include "point_wise_math/integrator.hpp"
+#include "point_wise_math/differentiator.hpp"
 
 struct TestResult
 {
@@ -41,7 +42,23 @@ void testIntegrator()
         std::cout << pt.time << "," << integral << "\n";
     }
 }
+void test_differentiator()
+{
+    std::cout << "\nRunning Differentiator test on Ramp signal...\n";
+    std::cout << "time,input,differentiated\n";
 
+    RampGenerator<float> rampGen(1.0f, 0.1f);
+    Differentiator<float> differentiator;
+
+    const int samples = 21;
+
+    for (int i = 0; i < samples; ++i)
+    {
+        Point<float> pt = rampGen.generateNext();
+        double diff = differentiator.differentiate(pt);
+        std::cout << pt.time << "," << pt.value << "," << diff << "\n";
+    }
+}
 
 
 void testSignalCompare()
@@ -198,5 +215,6 @@ int main()
 
     testSignalCompare(); // Optional test for comparator logic
     testIntegrator();
+    test_differentiator();
     return (total_failed > 0) ? 1 : 0;
 }
